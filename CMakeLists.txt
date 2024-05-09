@@ -9,7 +9,7 @@ if( MM_DEBUG )
     message("MN_DEBUG evaluates to True")
 endif()
 
-project(MyMoneroClient)
+project(BELDEXClient)
 #
 include_directories("src")
 include_directories("node_modules")
