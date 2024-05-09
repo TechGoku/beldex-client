@@ -15,9 +15,9 @@ include_directories("src")
 include_directories("node_modules")
 #
 set(BELDEX_SRC "src/submodules/beldex-core-custom")
-set(MYMONERO_CORE_CPP_SRC "src/submodules/beldex-core-cpp/src")
+set(BELDEX_CORE_CPP_SRC "src/submodules/beldex-core-cpp/src")
 #
-include_directories("${MYMONERO_CORE_CPP_SRC}")
+include_directories("${BELDEX_CORE_CPP_SRC}")
 #
 include_directories(${BELDEX_SRC})
 include_directories("${BELDEX_SRC}/external")
@@ -45,28 +45,28 @@ set(
     src/SendFundsFormSubmissionController.hpp
     src/SendFundsFormSubmissionController.cpp
     #
-    ${MYMONERO_CORE_CPP_SRC}/beldex_address_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_address_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_paymentID_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_paymentID_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_key_image_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_key_image_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_fee_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_fee_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_transfer_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_transfer_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_fork_rules.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_fork_rules.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_wallet_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_wallet_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/serial_bridge_index.hpp
-    ${MYMONERO_CORE_CPP_SRC}/serial_bridge_index.cpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_send_routine.hpp
-    ${MYMONERO_CORE_CPP_SRC}/beldex_send_routine.cpp
-    ${MYMONERO_CORE_CPP_SRC}/serial_bridge_utils.hpp
-    ${MYMONERO_CORE_CPP_SRC}/serial_bridge_utils.cpp
-    ${MYMONERO_CORE_CPP_SRC}/tools__ret_vals.hpp
-    ${MYMONERO_CORE_CPP_SRC}/tools__ret_vals.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_address_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_address_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_paymentID_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_paymentID_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_key_image_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_key_image_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_fee_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_fee_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_transfer_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_transfer_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_fork_rules.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_fork_rules.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_wallet_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_wallet_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/serial_bridge_index.hpp
+    ${BELDEX_CORE_CPP_SRC}/serial_bridge_index.cpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_send_routine.hpp
+    ${BELDEX_CORE_CPP_SRC}/beldex_send_routine.cpp
+    ${BELDEX_CORE_CPP_SRC}/serial_bridge_utils.hpp
+    ${BELDEX_CORE_CPP_SRC}/serial_bridge_utils.cpp
+    ${BELDEX_CORE_CPP_SRC}/tools__ret_vals.hpp
+    ${BELDEX_CORE_CPP_SRC}/tools__ret_vals.cpp
     #
     ${BELDEX_SRC}/cryptonote_basic/account.cpp
     ${BELDEX_SRC}/cryptonote_basic/cryptonote_basic.h
@@ -156,9 +156,9 @@ set (EMCC_LINKER_FLAGS__WASM
 
 message(STATUS "EMCC_LINKER_FLAGS__WASM ${EMCC_LINKER_FLAGS__WASM}")
 #
-add_executable(MyMoneroClient_WASM ${SRC_FILES})
+add_executable(BELDEXClient_WASM ${SRC_FILES})
 #
-set_target_properties(MyMoneroClient_WASM PROPERTIES COMPILE_FLAGS "-s USE_BOOST_HEADERS=1" LINK_FLAGS "${EMCC_LINKER_FLAGS__WASM}")
+set_target_properties(BELDEXClient_WASM PROPERTIES COMPILE_FLAGS "-s USE_BOOST_HEADERS=1" LINK_FLAGS "${EMCC_LINKER_FLAGS__WASM}")
 #
 #message("Log-lib: ${log-lib}")
 #target_link_libraries(MyMoneroClient_WASM ${log-lib})
