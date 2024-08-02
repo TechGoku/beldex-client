@@ -1,5 +1,5 @@
 {
-  "name": "@mymonero/mymonero-monero-client",
+  "name": "@bdxi/beldex-client",
   "version": "3.0.0",
   "description": "The JS library containing the JS transpilation of the shared library behind the MyMonero apps",
   "main": "./src/index.js",
