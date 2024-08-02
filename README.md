@@ -1,9 +1,7 @@
-<p align="center">
-  <img alt="MyMonero" src="https://user-images.githubusercontent.com/1645428/146000939-b06f8fd3-9ed2-4a5e-bdd6-3981281dde9c.png">
-</p>
+
 
 <p align="center">
-  Repo to manage MyMoneroClient Web Assembly
+  Repo to manage BeldexClient Web Assembly
 </p>
 
 > :warning: This project is under heavy development. Expect bugs & breaking changes.
@@ -13,11 +11,11 @@ If you would like to generate the WASM files yourself you will require docker
 
 ## Building
 
-1. Clone the repo `git clone https://github.com/mymonero/mymonero-utils.git`
-1. `cd packages/mymonero-monero-client`
+1. Clone the repo `git clone https://github.com/beldex/beldex-utils.git`
+1. `cd packages/beldex-client`
 1. `rm -rf build` removes the old build folder if you have run a build previously.
-1. `rm src/MyMoneroClient_*` removes the old WASM before your new build.
-1. `./prepare.sh` to fetch the monero core code and the mymonero bridging code.
+1. `rm src/BeldexClient_*` removes the old WASM before your new build.
+1. `./prepare.sh` to fetch the beldex core code and the beldex bridging code.
 1. `npm run build` initiates the emscripten docker image to build the project.
 
 By following these instructions, new WASM library is generated and copied to the src folder
@@ -25,15 +23,15 @@ By following these instructions, new WASM library is generated and copied to the
 -----
 ## Upgrading from 2.1.x to 2.2.x and 3.x.x
 
-No breaking changes have been made to any packages besides @mymonero/mymonero-monero-client.
+No breaking changes have been made to any packages besides @bdxi/beldex-client.
 
-For users of @mymonero/mymonero-monero-client, the following changes have been made:
+For users of @bdxi/beldex-client, the following changes have been made:
 
-Version 2.2.0 and onwards have changed from having separate MyMoneroClient_WASM.wasm and MyMoneroClient_WASM.js, and now unify the WASM and .js file together. 
+Version 2.2.0 and onwards have changed from having separate BeldexClient_WASM.wasm and BeldexClient_WASM.js, and now unify the WASM and .js file together. 
 
 For webpack users, if you had a script set up to copy the WASM as part of your build process, this should be removed from your webpack.config.js file. 
 
-Otherwise, any users of the mymonero-monero-client library should not need to change anything on their side unless you were loading the WASM using a custom method different to our documentation. 
+Otherwise, any users of the beldex-client library should not need to change anything on their side unless you were loading the WASM using a custom method different to our documentation. 
 
 While we've made every effort to remain backwards compatible, please let us know if you experience any issues.
 ## Usage
@@ -43,7 +41,7 @@ While we've made every effort to remain backwards compatible, please let us know
 You can install the WASM and javascript bridging code via npm.
 
 ```bash
-npm i @mymonero/mymonero-monero-client
+npm i @bdxi/beldex-client
 ```
 
 ### Initialize
@@ -52,7 +50,7 @@ Initialize the WABridge class which loads and prepares the WebAssembly.
 The WABridge has helper methods for each of the calls allowing for linting and improved error handling
 
 ```js
-const WABridge = await require('@mymonero/mymonero-monero-client')({})
+const WABridge = await require('@bdxi/beldex-client')({})
 ```
 
 ### Generate Wallet

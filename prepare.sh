@@ -5,10 +5,10 @@ set -e # Exit on any error
 # Dependencies
 
 ## These should be audited!
-mymonero_core_cpp_url='https://github.com/Beldex-Coin/beldex-core-cpp.git'
-mymonero_core_cpp_hash='f35b6cc267891b253770b17e267a83667bcaa1a8'
-monero_core_custom_url='https://github.com/Beldex-Coin/beldex-core-custom.git'
-monero_core_custom_hash='63175e7ec8671b5c2c9dbfecbbda6c01d6654659'
+beldex_core_cpp_url='https://github.com/Beldex-Coin/beldex-core-cpp.git'
+beldex_core_cpp_hash='f35b6cc267891b253770b17e267a83667bcaa1a8'
+beldex_core_custom_url='https://github.com/Beldex-Coin/beldex-core-custom.git'
+beldex_core_custom_hash='63175e7ec8671b5c2c9dbfecbbda6c01d6654659'
 
 if [ "$(basename "$(pwd)")" != "beldex-client" ]; then
   echo "Should be ran from the repo dir!"
@@ -34,8 +34,8 @@ function clonerepo { # source, target, commit
 
 echo "Cloning dependencies..."
 rm -rf 'src/submodules' && mkdir -p 'src/submodules'
-clonerepo "${mymonero_core_cpp_url}" 'src/submodules/beldex-core-cpp' "${mymonero_core_cpp_hash}"
-clonerepo "${monero_core_custom_url}" 'src/submodules/beldex-core-custom' "${monero_core_custom_hash}"
+clonerepo "${beldex_core_cpp_url}" 'src/submodules/beldex-core-cpp' "${beldex_core_cpp_hash}"
+clonerepo "${beldex_core_custom_url}" 'src/submodules/beldex-core-custom' "${beldex_core_custom_hash}"
 
 # Prepare for build
 

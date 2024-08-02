@@ -95,12 +95,12 @@ string FormSubmissionController::prepare()
 		paymentID_toUseOrToNilIfIntegrated = this->parameters.manuallyEnteredPaymentID.get();
 	}
 		
-	this->isXMRAddressIntegrated = false;
+	this->isBDXAddressIntegrated = false;
  	this->integratedAddressPIDForDisplay = boost::none;
  	this->to_address_strings.clear();
  	this->to_address_strings.reserve(this->parameters.enteredAddressValues.size());
- 	for (string& xmrAddress_toDecode : this->parameters.enteredAddressValues) {
- 		auto decode_retVals = beldex::address_utils::decodedAddress(xmrAddress_toDecode, this->parameters.nettype);
+ 	for (string& bdxAddress_toDecode : this->parameters.enteredAddressValues) {
+ 		auto decode_retVals = beldex::address_utils::decodedAddress(bdxAddress_toDecode, this->parameters.nettype);
  		if (decode_retVals.did_error) {
  			return error_ret_json_from_message("Invalid address");
  		}
@@ -109,38 +109,38 @@ string FormSubmissionController::prepare()
 			return error_ret_json_from_message("PID is not valid");
 		}
 		if (decode_retVals.paymentID_string != boost::none) { // is integrated address!
-			this->to_address_strings.emplace_back(std::move(xmrAddress_toDecode));
-			if (this->isXMRAddressIntegrated) {
+			this->to_address_strings.emplace_back(std::move(bdxAddress_toDecode));
+			if (this->isBDXAddressIntegrated) {
 				return error_ret_json_from_message("Only one integrated address allowed per transaction");
 			}
 			this->payment_id_string = boost::none;
-			this->isXMRAddressIntegrated = true;
+			this->isBDXAddressIntegrated = true;
 			this->integratedAddressPIDForDisplay = *decode_retVals.paymentID_string;
 		}
 		else if (paymentID_toUseOrToNilIfIntegrated != boost::none && !paymentID_toUseOrToNilIfIntegrated->empty() && !decode_retVals.isSubaddress && 
                          paymentID_toUseOrToNilIfIntegrated->size() == beldex_paymentID_utils::payment_id_length__short) {  // no subaddress, short pid provided, will make integrated address
 				THROW_WALLET_EXCEPTION_IF(decode_retVals.isSubaddress, error::wallet_internal_error, "Expected !decode_retVals.isSubaddress"); // just an extra safety measure
 				boost::optional<string> fabricated_integratedAddress_orNone = beldex::address_utils::new_integratedAddrFromStdAddr( // construct integrated address
-					xmrAddress_toDecode, // the monero one
+					bdxAddress_toDecode, // the monero one
 					*paymentID_toUseOrToNilIfIntegrated, // short pid
 					this->parameters.nettype
 				);
 				if (fabricated_integratedAddress_orNone == boost::none) {
 					return error_ret_json_from_message("Could not construct integrated address");
 				}
-				if (this->isXMRAddressIntegrated) {
+				if (this->isBDXAddressIntegrated) {
                                 	return error_ret_json_from_message("Only one integrated address allowed per transaction");
                         	}
 				this->to_address_strings.emplace_back(*fabricated_integratedAddress_orNone);
 				this->payment_id_string = boost::none; // must now zero this or Send will throw a "pid must be blank with integrated addr"
-				this->isXMRAddressIntegrated = true;
+				this->isBDXAddressIntegrated = true;
 				this->integratedAddressPIDForDisplay = *paymentID_toUseOrToNilIfIntegrated; // a short pid
 		}
 
 		else {
-			this->to_address_strings.emplace_back(std::move(xmrAddress_toDecode)); // therefore, non-integrated normal XMR address
+			this->to_address_strings.emplace_back(std::move(bdxAddress_toDecode)); // therefore, non-integrated normal XMR address
 			this->payment_id_string = paymentID_toUseOrToNilIfIntegrated; // may still be nil
-			this->isXMRAddressIntegrated = false;
+			this->isBDXAddressIntegrated = false;
 			this->integratedAddressPIDForDisplay = boost::none;
 		} 
  	}
@@ -434,7 +434,7 @@ string FormSubmissionController::cb_III__submitted_tx()
 	// success_retVals.tx_key_string = *(this->step2_retVals__tx_key_string);
 	// success_retVals.tx_pub_key_string = *(this->step2_retVals__tx_pub_key_string);
 	// success_retVals.final_total_wo_fee = *(this->step1_retVals__final_total_wo_fee);
-	// success_retVals.isXMRAddressIntegrated = this-isXMRAddressIntegrated;
+	// success_retVals.isBDXAddressIntegrated = this-isBDXAddressIntegrated;
 	// success_retVals.integratedAddressPIDForDisplay = this->integratedAddressPIDForDisplay;
 	// XXX success_retVals.target_address = this->to_address_string;
 
@@ -469,7 +469,7 @@ string FormSubmissionController::cb_III__submitted_tx()
 	}
 	root.put("target_address", target_address_str); 
 	root.put("final_total_wo_fee", std::move(RetVals_Transforms::str_from(*(this->step1_retVals__final_total_wo_fee))));
-	root.put("isXMRAddressIntegrated", std::move(RetVals_Transforms::str_from(this-isXMRAddressIntegrated)));
+	root.put("isBDXAddressIntegrated", std::move(RetVals_Transforms::str_from(this-isBDXAddressIntegrated)));
 	if (this->integratedAddressPIDForDisplay) {
 		root.put("integratedAddressPIDForDisplay", std::move(*(this->integratedAddressPIDForDisplay)));
 	}

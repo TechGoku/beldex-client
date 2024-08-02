@@ -102,7 +102,7 @@ namespace SendFunds
 		uint64_t final_total_wo_fee;
 		uint64_t total_sent; // final_total_wo_fee + final_fee
 		size_t mixin;
-		bool isXMRAddressIntegrated; // regarding sentTo_address
+		bool isBDXAddressIntegrated; // regarding sentTo_address
 		boost::optional<string> final_payment_id; // will be filled if a payment id was passed in or an integrated address was used
 		boost::optional<string> integratedAddressPIDForDisplay;
 		string signed_serialized_tx_string;
@@ -167,7 +167,7 @@ namespace SendFunds
 		vector<uint64_t> sending_amounts;
  		vector<string> to_address_strings;
 		boost::optional<string> payment_id_string;
-		bool isXMRAddressIntegrated;
+		bool isBDXAddressIntegrated;
 		boost::optional<string> integratedAddressPIDForDisplay;
 		// - from cb_i
 		vector<SpendableOutput> unspent_outs;
