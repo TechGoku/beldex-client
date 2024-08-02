@@ -9,7 +9,7 @@ if( MM_DEBUG )
     message("MN_DEBUG evaluates to True")
 endif()
 
-project(BELDEXClient)
+project(BeldexClient)
 #
 include_directories("src")
 include_directories("node_modules")
@@ -134,7 +134,7 @@ set (EMCC_LINKER_FLAGS__WASM
 -sSINGLE_FILE \
 -s STRICT=0 \
 -s MODULARIZE=1 \
--s 'EXPORT_NAME=\"MyMoneroClient\"' \
+-s 'EXPORT_NAME=\"BeldexClient\"' \
 -s WASM=1 \
 -s ASSERTIONS=2 \
 -s DEMANGLE_SUPPORT=1 \
@@ -156,9 +156,9 @@ set (EMCC_LINKER_FLAGS__WASM
 
 message(STATUS "EMCC_LINKER_FLAGS__WASM ${EMCC_LINKER_FLAGS__WASM}")
 #
-add_executable(BELDEXClient_WASM ${SRC_FILES})
+add_executable(BeldexClient_WASM ${SRC_FILES})
 #
-set_target_properties(BELDEXClient_WASM PROPERTIES COMPILE_FLAGS "-s USE_BOOST_HEADERS=1" LINK_FLAGS "${EMCC_LINKER_FLAGS__WASM}")
+set_target_properties(BeldexClient_WASM PROPERTIES COMPILE_FLAGS "-s USE_BOOST_HEADERS=1" LINK_FLAGS "${EMCC_LINKER_FLAGS__WASM}")
 #
 #message("Log-lib: ${log-lib}")
-#target_link_libraries(MyMoneroClient_WASM ${log-lib})
+#target_link_libraries(BeldexClient_WASM ${log-lib})
